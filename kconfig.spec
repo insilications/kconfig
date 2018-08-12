@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kconfig
-Version  : 5.48.0
-Release  : 1
-URL      : https://download.kde.org/stable/frameworks/5.48/kconfig-5.48.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.48/kconfig-5.48.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.48/kconfig-5.48.0.tar.xz.sig
+Version  : 5.49.0
+Release  : 2
+URL      : https://download.kde.org/stable/frameworks/5.49/kconfig-5.49.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.49/kconfig-5.49.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.49/kconfig-5.49.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -19,6 +19,7 @@ Requires: kconfig-license
 Requires: kconfig-data
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : qtbase-dev qtbase-extras mesa-dev
 
 %description
 # KConfig
@@ -76,14 +77,14 @@ license components for the kconfig package.
 
 
 %prep
-%setup -q -n kconfig-5.48.0
+%setup -q -n kconfig-5.49.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1531922688
+export SOURCE_DATE_EPOCH=1534087705
 mkdir clr-build
 pushd clr-build
 %cmake ..
@@ -91,7 +92,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1531922688
+export SOURCE_DATE_EPOCH=1534087705
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/kconfig
 cp COPYING.LIB %{buildroot}/usr/share/doc/kconfig/COPYING.LIB
@@ -251,9 +252,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5ConfigCore.so.5
-/usr/lib64/libKF5ConfigCore.so.5.48.0
+/usr/lib64/libKF5ConfigCore.so.5.49.0
 /usr/lib64/libKF5ConfigGui.so.5
-/usr/lib64/libKF5ConfigGui.so.5.48.0
+/usr/lib64/libKF5ConfigGui.so.5.49.0
 
 %files license
 %defattr(-,root,root,-)
