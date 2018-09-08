@@ -1,0 +1,9 @@
+# This file contains recursive sources that require this package
+baloo
+cantor
+kbookmarks
+kconfigwidgets
+kiconthemes
+kio
+kservice
+kxmlgui
