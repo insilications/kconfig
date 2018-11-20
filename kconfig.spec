@@ -6,7 +6,7 @@
 #
 Name     : kconfig
 Version  : 5.52.0
-Release  : 8
+Release  : 9
 URL      : https://download.kde.org/stable/frameworks/5.52/kconfig-5.52.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.52/kconfig-5.52.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.52/kconfig-5.52.0.tar.xz.sig
@@ -27,14 +27,6 @@ Persistent platform-independent application settings.
 ## Introduction
 KConfig provides an advanced configuration system. It is made of two parts:
 KConfigCore and KConfigGui.
-
-%package abi
-Summary: abi components for the kconfig package.
-Group: Default
-
-%description abi
-abi components for the kconfig package.
-
 
 %package bin
 Summary: bin components for the kconfig package.
@@ -92,7 +84,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541866450
+export SOURCE_DATE_EPOCH=1542739243
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -100,7 +92,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1541866450
+export SOURCE_DATE_EPOCH=1542739243
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kconfig
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/COPYING.LIB
@@ -112,11 +104,6 @@ popd
 %defattr(-,root,root,-)
 /usr/lib64/libexec/kf5/kconf_update
 /usr/lib64/libexec/kf5/kconfig_compiler_kf5
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libKF5ConfigCore.so.5.52.0.abi
-/usr/share/abi/libKF5ConfigGui.so.5.52.0.abi
 
 %files bin
 %defattr(-,root,root,-)
