@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kconfig
-Version  : 5.53.0
-Release  : 12
-URL      : https://download.kde.org/stable/frameworks/5.53/kconfig-5.53.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.53/kconfig-5.53.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.53/kconfig-5.53.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 5.54.0
+Release  : 13
+URL      : https://download.kde.org/stable/frameworks/5.54/kconfig-5.54.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.54/kconfig-5.54.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.54/kconfig-5.54.0.tar.xz.sig
+Summary  : Configuration system
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: kconfig-bin = %{version}-%{release}
@@ -22,11 +22,13 @@ BuildRequires : buildreq-kde
 BuildRequires : qtbase-dev mesa-dev
 
 %description
-# KConfig
-Persistent platform-independent application settings.
-## Introduction
-KConfig provides an advanced configuration system. It is made of two parts:
-KConfigCore and KConfigGui.
+/**
+\page kconfig_compiler The KDE Configuration Compiler
+kconfig_compiler generates C++ source code from an XML file containing
+information about configuration options (.kcfg) and a file that provides
+the code generation options (.kcfgc) The generated class is based on
+KConfigSkeleton and provides an API for the application to access its
+configuration data.
 
 %package bin
 Summary: bin components for the kconfig package.
@@ -77,14 +79,14 @@ license components for the kconfig package.
 
 
 %prep
-%setup -q -n kconfig-5.53.0
+%setup -q -n kconfig-5.54.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1544485898
+export SOURCE_DATE_EPOCH=1547312193
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -92,7 +94,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1544485898
+export SOURCE_DATE_EPOCH=1547312193
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kconfig
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/COPYING.LIB
@@ -253,9 +255,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5ConfigCore.so.5
-/usr/lib64/libKF5ConfigCore.so.5.53.0
+/usr/lib64/libKF5ConfigCore.so.5.54.0
 /usr/lib64/libKF5ConfigGui.so.5
-/usr/lib64/libKF5ConfigGui.so.5.53.0
+/usr/lib64/libKF5ConfigGui.so.5.54.0
 
 %files license
 %defattr(0644,root,root,0755)
