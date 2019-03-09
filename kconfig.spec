@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kconfig
-Version  : 5.55.0
-Release  : 14
-URL      : https://download.kde.org/stable/frameworks/5.55/kconfig-5.55.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.55/kconfig-5.55.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.55/kconfig-5.55.0.tar.xz.sig
+Version  : 5.56.0
+Release  : 15
+URL      : https://download.kde.org/stable/frameworks/5.56/kconfig-5.56.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.56/kconfig-5.56.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.56/kconfig-5.56.0.tar.xz.sig
 Summary  : Configuration system
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -55,6 +55,7 @@ Requires: kconfig-lib = %{version}-%{release}
 Requires: kconfig-bin = %{version}-%{release}
 Requires: kconfig-data = %{version}-%{release}
 Provides: kconfig-devel = %{version}-%{release}
+Requires: kconfig = %{version}-%{release}
 
 %description dev
 dev components for the kconfig package.
@@ -79,22 +80,23 @@ license components for the kconfig package.
 
 
 %prep
-%setup -q -n kconfig-5.55.0
+%setup -q -n kconfig-5.56.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549727612
+export SOURCE_DATE_EPOCH=1552146728
 mkdir -p clr-build
 pushd clr-build
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549727612
+export SOURCE_DATE_EPOCH=1552146728
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kconfig
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/COPYING.LIB
@@ -255,9 +257,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5ConfigCore.so.5
-/usr/lib64/libKF5ConfigCore.so.5.55.0
+/usr/lib64/libKF5ConfigCore.so.5.56.0
 /usr/lib64/libKF5ConfigGui.so.5
-/usr/lib64/libKF5ConfigGui.so.5.55.0
+/usr/lib64/libKF5ConfigGui.so.5.56.0
 
 %files license
 %defattr(0644,root,root,0755)
