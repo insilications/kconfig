@@ -6,11 +6,11 @@
 #
 Name     : kconfig
 Version  : 5.60.0
-Release  : 21
+Release  : 22
 URL      : https://download.kde.org/stable/frameworks/5.60/kconfig-5.60.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.60/kconfig-5.60.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.60/kconfig-5.60.0.tar.xz.sig
-Summary  : Configuration system
+Source1 : https://download.kde.org/stable/frameworks/5.60/kconfig-5.60.0.tar.xz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: kconfig-bin = %{version}-%{release}
@@ -20,15 +20,14 @@ Requires: kconfig-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : qtbase-dev mesa-dev
+Patch1: CVE-2019-14744.patch
 
 %description
-/**
-\page kconfig_compiler The KDE Configuration Compiler
-kconfig_compiler generates C++ source code from an XML file containing
-information about configuration options (.kcfg) and a file that provides
-the code generation options (.kcfgc) The generated class is based on
-KConfigSkeleton and provides an API for the application to access its
-configuration data.
+# KConfig
+Persistent platform-independent application settings.
+## Introduction
+KConfig provides an advanced configuration system. It is made of two parts:
+KConfigCore and KConfigGui.
 
 %package bin
 Summary: bin components for the kconfig package.
@@ -56,7 +55,6 @@ Requires: kconfig-bin = %{version}-%{release}
 Requires: kconfig-data = %{version}-%{release}
 Provides: kconfig-devel = %{version}-%{release}
 Requires: kconfig = %{version}-%{release}
-Requires: kconfig = %{version}-%{release}
 
 %description dev
 dev components for the kconfig package.
@@ -82,29 +80,30 @@ license components for the kconfig package.
 
 %prep
 %setup -q -n kconfig-5.60.0
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1563037198
+export SOURCE_DATE_EPOCH=1565247090
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %cmake ..
 make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1563037198
+export SOURCE_DATE_EPOCH=1565247090
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kconfig
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/COPYING.LIB
