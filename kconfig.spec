@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kconfig
-Version  : 5.69.0
-Release  : 31
-URL      : https://download.kde.org/stable/frameworks/5.69/kconfig-5.69.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.69/kconfig-5.69.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.69/kconfig-5.69.0.tar.xz.sig
-Summary  : Configuration system
+Version  : 5.70.0
+Release  : 32
+URL      : https://download.kde.org/stable/frameworks/5.70/kconfig-5.70.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.70/kconfig-5.70.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.70/kconfig-5.70.0.tar.xz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-3.0
 Requires: kconfig-bin = %{version}-%{release}
@@ -19,16 +19,16 @@ Requires: kconfig-lib = %{version}-%{release}
 Requires: kconfig-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
+BuildRequires : qtbase-dev
 BuildRequires : qtbase-dev mesa-dev
 
 %description
-/**
-\page kconfig_compiler The KDE Configuration Compiler
-kconfig_compiler generates C++ source code from an XML file containing
-information about configuration options (.kcfg) and a file that provides
-the code generation options (.kcfgc) The generated class is based on
-KConfigSkeleton and provides an API for the application to access its
-configuration data.
+# KConfig
+Persistent platform-independent application settings.
+## Introduction
+KConfig provides an advanced configuration system. It is made of two parts:
+KConfigCore and KConfigGui.
 
 %package bin
 Summary: bin components for the kconfig package.
@@ -56,7 +56,6 @@ Requires: kconfig-bin = %{version}-%{release}
 Requires: kconfig-data = %{version}-%{release}
 Provides: kconfig-devel = %{version}-%{release}
 Requires: kconfig = %{version}-%{release}
-Requires: kconfig = %{version}-%{release}
 
 %description dev
 dev components for the kconfig package.
@@ -81,36 +80,35 @@ license components for the kconfig package.
 
 
 %prep
-%setup -q -n kconfig-5.69.0
-cd %{_builddir}/kconfig-5.69.0
+%setup -q -n kconfig-5.70.0
+cd %{_builddir}/kconfig-5.70.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1586811752
+export SOURCE_DATE_EPOCH=1589211125
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export FFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1586811752
+export SOURCE_DATE_EPOCH=1589211125
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kconfig
-cp %{_builddir}/kconfig-5.69.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/9a1929f4700d2407c70b507b3b2aaf6226a9543c
-cp %{_builddir}/kconfig-5.69.0/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kconfig/e458941548e0864907e654fa2e192844ae90fc32
+cp %{_builddir}/kconfig-5.70.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kconfig-5.70.0/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kconfig/e458941548e0864907e654fa2e192844ae90fc32
 pushd clr-build
 %make_install
 popd
@@ -269,9 +267,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5ConfigCore.so.5
-/usr/lib64/libKF5ConfigCore.so.5.69.0
+/usr/lib64/libKF5ConfigCore.so.5.70.0
 /usr/lib64/libKF5ConfigGui.so.5
-/usr/lib64/libKF5ConfigGui.so.5.69.0
+/usr/lib64/libKF5ConfigGui.so.5.70.0
 
 %files license
 %defattr(0644,root,root,0755)
