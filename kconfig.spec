@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kconfig
-Version  : 5.70.0
-Release  : 32
-URL      : https://download.kde.org/stable/frameworks/5.70/kconfig-5.70.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.70/kconfig-5.70.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.70/kconfig-5.70.0.tar.xz.sig
+Version  : 5.71.0
+Release  : 33
+URL      : https://download.kde.org/stable/frameworks/5.71/kconfig-5.71.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.71/kconfig-5.71.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.71/kconfig-5.71.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-3.0
@@ -80,15 +80,15 @@ license components for the kconfig package.
 
 
 %prep
-%setup -q -n kconfig-5.70.0
-cd %{_builddir}/kconfig-5.70.0
+%setup -q -n kconfig-5.71.0
+cd %{_builddir}/kconfig-5.71.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1589211125
+export SOURCE_DATE_EPOCH=1592243260
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -104,11 +104,11 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1589211125
+export SOURCE_DATE_EPOCH=1592243260
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kconfig
-cp %{_builddir}/kconfig-5.70.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/9a1929f4700d2407c70b507b3b2aaf6226a9543c
-cp %{_builddir}/kconfig-5.70.0/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kconfig/e458941548e0864907e654fa2e192844ae90fc32
+cp %{_builddir}/kconfig-5.71.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kconfig/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kconfig-5.71.0/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kconfig/e458941548e0864907e654fa2e192844ae90fc32
 pushd clr-build
 %make_install
 popd
@@ -127,6 +127,7 @@ popd
 %defattr(-,root,root,-)
 /usr/share/locale/af/LC_MESSAGES/kconfig5_qt.qm
 /usr/share/locale/ar/LC_MESSAGES/kconfig5_qt.qm
+/usr/share/locale/az/LC_MESSAGES/kconfig5_qt.qm
 /usr/share/locale/be/LC_MESSAGES/kconfig5_qt.qm
 /usr/share/locale/be@latin/LC_MESSAGES/kconfig5_qt.qm
 /usr/share/locale/bg/LC_MESSAGES/kconfig5_qt.qm
@@ -267,9 +268,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5ConfigCore.so.5
-/usr/lib64/libKF5ConfigCore.so.5.70.0
+/usr/lib64/libKF5ConfigCore.so.5.71.0
 /usr/lib64/libKF5ConfigGui.so.5
-/usr/lib64/libKF5ConfigGui.so.5.70.0
+/usr/lib64/libKF5ConfigGui.so.5.71.0
 
 %files license
 %defattr(0644,root,root,0755)
